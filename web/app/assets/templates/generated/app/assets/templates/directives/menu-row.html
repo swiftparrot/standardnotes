@@ -1,0 +1,32 @@
+<div class='sk-menu-panel-row row' ng-attr-title='{{desc}}' ng-click='onClick($event)'>
+<div class='sk-menu-panel-column'>
+<div class='left'>
+<div class='sk-menu-panel-column' ng-if='circle &amp;&amp; (!circleAlign || circleAlign == &#39;left&#39;)'>
+<div class='sk-circle small' ng-class='circle'></div>
+</div>
+<div class='sk-menu-panel-column' ng-class='{&#39;faded&#39; : faded || disabled}'>
+<div class='sk-label' ng-class='stylekitClass'>
+{{label}}
+</div>
+<div class='sk-sublabel' ng-if='subtitle'>
+{{subtitle}}
+</div>
+<ng-transclude></ng-transclude>
+</div>
+</div>
+<div class='sk-menu-panel-subrows' ng-if='subRows &amp;&amp; subRows.length &gt; 0'>
+<menu-row action='row.onClick()' label='row.label' ng-repeat='row in subRows' spinner-class='row.spinnerClass' subtitle='row.subtitle'></menu-row>
+</div>
+</div>
+<div class='sk-menu-panel-column' ng-if='circle &amp;&amp; circleAlign == &#39;right&#39;'>
+<div class='sk-circle small' ng-class='circle'></div>
+</div>
+<div class='sk-menu-panel-column' ng-if='hasButton'>
+<div class='sk-button' ng-class='buttonClass' ng-click='clickButton($event)'>
+<div class='sk-label'>{{buttonText}}</div>
+</div>
+</div>
+<div class='sk-menu-panel-column' ng-if='spinnerClass'>
+<div class='sk-spinner small' ng-class='spinnerClass'></div>
+</div>
+</div>

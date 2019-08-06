@@ -1,0 +1,39 @@
+{:uriI"file://app/assets/templates/generated/app/assets/templates/lock-screen.html?type=text/html&id=2c2ff221ab1e1b5e30fddfafc8fcbcaff636f642c70055405016e679616744ae:ET:load_pathI"app/assets/templates;T:filenameI"Iapp/assets/templates/generated/app/assets/templates/lock-screen.html;T:	nameI"/generated/app/assets/templates/lock-screen;T:logical_pathI"4generated/app/assets/templates/lock-screen.html;T:content_typeI"text/html;T:sourceI"ã<div class='sn-component' id='lock-screen'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Passcode Required</div>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section'>
+<form class='sk-panel-form sk-panel-row' ng-submit='submitPasscodeForm()'>
+<div class='sk-panel-column stretch'>
+<input autocomplete='new-password' autofocus='true' class='center-text sk-input contrast' id='passcode-input' ng-model='formData.passcode' placeholder='Enter Passcode' should-focus='true' sn-autofocus='true' type='password'>
+<div class='sk-button-group stretch sk-panel-row form-submit'>
+<button class='sk-button info' type='submit'>
+<div class='sk-label'>Unlock</div>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class='sk-panel-footer'>
+<div id='passcode-reset'>
+<a class='sk-a neutral' ng-click='forgotPasscode()' ng-if='!formData.showRecovery'>Forgot?</a>
+<div ng-if='formData.showRecovery'>
+<div class='sk-p'>
+If you forgot your local passcode, your only option is to clear your local data from this device
+and sign back in to your account.
+</div>
+<div class='sk-panel-row'></div>
+<a class='sk-a danger center-text' ng-click='beginDeleteData()'>Delete Local Data</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"Wfile-digest://app/assets/templates/generated/app/assets/templates/lock-screen.html;TTF:charsetI"
+utf-8;F:digest"%‚Ë¬™2ÀV/?ƒ‡«K&ÔZ…”„9ŸvÂVšUÏÌ):lengthiã:dependencies_digest"%ÈxrÔÜ¼Š€“ˆÍK_hÇËÆa)lÏ{ËHõ:idI"E2c2ff221ab1e1b5e30fddfafc8fcbcaff636f642c70055405016e679616744ae;F:
+mtimel+3]

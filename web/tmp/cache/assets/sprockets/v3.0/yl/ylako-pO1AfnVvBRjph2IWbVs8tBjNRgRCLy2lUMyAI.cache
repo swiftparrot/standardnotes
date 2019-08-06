@@ -1,0 +1,24 @@
+{:uriI"©file://app/assets/templates/generated/app/assets/templates/directives/editor-menu.html?type=text/html&id=9951b06d7ca8b1b86b3dfb1757e7adcc4930c7daa6ab13ad955b682633588356:ET:load_pathI"app/assets/templates;T:filenameI"Tapp/assets/templates/generated/app/assets/templates/directives/editor-menu.html;T:	nameI":generated/app/assets/templates/directives/editor-menu;T:logical_pathI"?generated/app/assets/templates/directives/editor-menu.html;T:content_typeI"text/html;T:sourceI"+<div class='sn-component'>
+<div class='sk-menu-panel dropdown-menu'>
+<div class='sk-menu-panel-section'>
+<div class='sk-menu-panel-header'>
+<div class='sk-menu-panel-header-title'>Note Editor</div>
+</div>
+<menu-row action='selectComponent(null)' circle='selectedEditor == null &amp;&amp; &#39;success&#39;' label='&#39;Plain Editor&#39;'></menu-row>
+<menu-row action='selectComponent(editor)' button-action='toggleDefaultForEditor(editor)' button-class='defaultEditor == editor ? &#39;warning&#39; : &#39;info&#39;' button-text='defaultEditor == editor ? &#39;Undefault&#39; : &#39;Set Default&#39;' circle='selectedEditor === editor &amp;&amp; &#39;success&#39;' has-button='selectedEditor == editor || defaultEditor == editor' label='editor.name' ng-repeat='editor in editors'>
+<div class='sk-menu-panel-column' ng-if='component.content.conflict_of || shouldDisplayRunningLocallyLabel(editor)'>
+<strong class='danger medium-text' ng-if='editor.content.conflict_of'>Conflicted copy</strong>
+<div class='sk-sublabel' ng-if='shouldDisplayRunningLocallyLabel(editor)'>Running Locally</div>
+</div>
+</menu-row>
+<a class='no-decoration' href='https://standardnotes.org/extensions' ng-if='editors.length == 0' rel='noopener' target='blank'>
+<menu-row label='&#39;Download More Editors&#39;'></menu-row>
+</a>
+</div>
+</div>
+</div>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"bfile-digest://app/assets/templates/generated/app/assets/templates/directives/editor-menu.html;TTF:charsetI"
+utf-8;F:digest"%´{±îP{³hn©àP×Ö%O·Ö`t¡fç}êÇþ}’:lengthi+:dependencies_digest"%ŸR9ï²)ê&b¨YÀIýg=RàØÿj°ÿà@:idI"E9951b06d7ca8b1b86b3dfb1757e7adcc4930c7daa6ab13ad955b682633588356;F:
+mtimel+ž3]

@@ -1,0 +1,37 @@
+<div class='sn-component'>
+<div class='sk-modal large' id='conflict-resolution-modal'>
+<div class='sk-modal-background'></div>
+<div class='sk-modal-content'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<h1 class='sk-panel-header-title'>Conflicted items — choose which version to keep</h1>
+<div class='sk-horizontal-group'>
+<a class='sk-a info close-button' ng-click='keepItem1()'>Keep left</a>
+<a class='sk-a info close-button' ng-click='keepItem2()'>Keep right</a>
+<a class='sk-a info close-button' ng-click='keepBoth()'>Keep both</a>
+<a class='sk-a info close-button' ng-click='export()'>Export</a>
+<a class='sk-a info close-button' ng-click='dismiss(); $event.stopPropagation()'>Close</a>
+</div>
+</div>
+<div class='sk-panel-content selectable'>
+<div class='sk-panel-section'>
+<h3>
+<strong>Content type:</strong>
+{{contentType}}
+</h3>
+<p>You may wish to look at the "created_at" and "updated_at" fields of the items to gain better context in deciding which to keep.</p>
+</div>
+<div id='items'>
+<div class='sk-panel static item' id='item1'>
+<p class='normal' style='white-space: pre-wrap; font-size: 16px;'>{{item1Content}}</p>
+</div>
+<div class='border'></div>
+<div class='sk-panel static item' id='item2'>
+<p class='normal' style='white-space: pre-wrap; font-size: 16px;'>{{item2Content}}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

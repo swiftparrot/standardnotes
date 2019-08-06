@@ -1,0 +1,29 @@
+{:uriI"ªfile://app/assets/templates/generated/app/assets/templates/directives/actions-menu.html?type=text/html&id=6eb0646045db3a339642634e7a3f32511dd9f7e6bfa20a277794d8678f83b444:ET:load_pathI"app/assets/templates;T:filenameI"Uapp/assets/templates/generated/app/assets/templates/directives/actions-menu.html;T:	nameI";generated/app/assets/templates/directives/actions-menu;T:logical_pathI"@generated/app/assets/templates/directives/actions-menu.html;T:content_typeI"text/html;T:sourceI"«<div class='sn-component'>
+<div class='sk-menu-panel dropdown-menu'>
+<a class='no-decoration' href='https://standardnotes.org/extensions' ng-if='extensions.length == 0' rel='noopener' target='blank'>
+<menu-row label='&#39;Download Actions&#39;'></menu-row>
+</a>
+<div ng-repeat='extension in extensions'>
+<div class='sk-menu-panel-header' ng-click='extension.hide = !extension.hide; $event.stopPropagation();'>
+<div class='sk-menu-panel-column'>
+<div class='sk-menu-panel-header-title'>{{extension.name}}</div>
+<div class='sk-spinner small loading' ng-if='extension.loading'></div>
+<div ng-if='extension.hide'>â€¦</div>
+</div>
+</div>
+<menu-row action='executeAction(action, extension);' label='action.label' ng-if='!extension.hide' ng-repeat='action in extension.actionsWithContextForItem(item)' spinner-class='action.running ? &#39;info&#39; : null' sub-rows='action.subrows' subtitle='action.desc'>
+<div class='sk-sublabel' ng-if='action.access_type'>
+Uses
+<strong>{{action.access_type}}</strong>
+access to this note.
+</div>
+</menu-row>
+<menu-row faded='true' label='&#39;No Actions Available&#39;' ng-if='extension.actionsWithContextForItem(item).length == 0'></menu-row>
+</div>
+</div>
+</div>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"cfile-digest://app/assets/templates/generated/app/assets/templates/directives/actions-menu.html;TTF:charsetI"
+utf-8;F:digest"%uš6c«fÛpMžc”þ•G¼6oœAè¨¬ñÛ±½ò¸:lengthi«:dependencies_digest"%7F0e>µS,Ã?ÈR¿_&¿ËhëlÊ³;—]åc:idI"E6eb0646045db3a339642634e7a3f32511dd9f7e6bfa20a277794d8678f83b444;F:
+mtimel+ž3]

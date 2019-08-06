@@ -1,0 +1,9 @@
+<div class='main-ui-view' ng-class='platform'>
+<lock-screen ng-if='needsUnlock' on-success='onSuccessfulUnlock'></lock-screen>
+<div class='app' id='app' ng-class='appClass' ng-if='!needsUnlock'>
+<tags-section add-new='tagsAddNew' remove-tag='removeTag' save='tagsSave' selection-made='tagsSelectionMade'></tags-section>
+<notes-section add-new='notesAddNew' selection-made='notesSelectionMade' tag='selectedTag'></notes-section>
+<editor-section note='selectedNote' remove='deleteNote' update-tags='updateTagsForNote'></editor-section>
+</div>
+<footer ng-if='!needsUnlock'></footer>
+</div>

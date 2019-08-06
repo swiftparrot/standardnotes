@@ -1,0 +1,32 @@
+<div class='sn-component'>
+<div class='sk-modal small auto-height'>
+<div class='sk-modal-background'></div>
+<div class='sk-modal-content'>
+<div class='sn-component'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<div class='sk-h1 sk-panel-header-title'>{{title}}</div>
+<a class='sk-a info close-button' ng-click='dismiss()'>Close</a>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section'>
+<div class='sk-p sk-panel-row'>{{message}}</div>
+<div class='sk-panel-row'>
+<div class='sk-panel-column stretch'>
+<form ng-submit='submit()'>
+<input class='sk-input contrast' ng-model='formData.input' placeholder='{{placeholder}}' should-focus='true' sn-autofocus='true' type='{{type}}'>
+</form>
+</div>
+</div>
+</div>
+</div>
+<div class='sk-panel-footer'>
+<a class='sk-a info right' ng-click='submit()'>
+Submit
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

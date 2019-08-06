@@ -1,0 +1,19 @@
+{:uriI"­file://app/assets/templates/generated/app/assets/templates/directives/component-modal.html?type=text/html&id=4ac81595c71dcc3086e4ee49a4f393fed9bf9cd5a910e10b032e8a5f757c9de7:ET:load_pathI"app/assets/templates;T:filenameI"Xapp/assets/templates/generated/app/assets/templates/directives/component-modal.html;T:	nameI">generated/app/assets/templates/directives/component-modal;T:logical_pathI"Cgenerated/app/assets/templates/directives/component-modal.html;T:content_typeI"text/html;T:sourceI"<div class='sk-modal-background' ng-click='dismiss()'></div>
+<div class='sk-modal-content' ng-attr-id='component-content-outer-{{component.uuid}}'>
+<div class='sn-component'>
+<div class='sk-panel' ng-attr-id='component-content-inner-{{component.uuid}}'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>
+{{component.name}}
+</div>
+<a class='sk-a info close-button' ng-click='dismiss()'>Close</a>
+</div>
+<component-view class='component-view' component='component'></component-view>
+</div>
+</div>
+</div>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"ffile-digest://app/assets/templates/generated/app/assets/templates/directives/component-modal.html;TTF:charsetI"
+utf-8;F:digest"%Õ Àm\€ëBÚY²™ë?fà¦ÿ«“Ùût.h:lengthi:dependencies_digest"%*q}Œ™ÓÊí…qóé“¤5wçc-fÑjÛdŠ¬ªü¶:idI"E4ac81595c71dcc3086e4ee49a4f393fed9bf9cd5a910e10b032e8a5f757c9de7;F:
+mtimel+3]

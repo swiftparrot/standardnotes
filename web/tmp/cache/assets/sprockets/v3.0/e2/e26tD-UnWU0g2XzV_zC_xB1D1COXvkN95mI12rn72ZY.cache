@@ -1,0 +1,14 @@
+{:uriI"—file://app/assets/templates/generated/app/assets/templates/home.html?type=text/html&id=d8c7a9864e44e40829293b8515ace4a663ab033f8acc8cb9ce9eb0997e906f10:ET:load_pathI"app/assets/templates;T:filenameI"Bapp/assets/templates/generated/app/assets/templates/home.html;T:	nameI"(generated/app/assets/templates/home;T:logical_pathI"-generated/app/assets/templates/home.html;T:content_typeI"text/html;T:sourceI"K<div class='main-ui-view' ng-class='platform'>
+<lock-screen ng-if='needsUnlock' on-success='onSuccessfulUnlock'></lock-screen>
+<div class='app' id='app' ng-class='appClass' ng-if='!needsUnlock'>
+<tags-section add-new='tagsAddNew' remove-tag='removeTag' save='tagsSave' selection-made='tagsSelectionMade'></tags-section>
+<notes-section add-new='notesAddNew' selection-made='notesSelectionMade' tag='selectedTag'></notes-section>
+<editor-section note='selectedNote' remove='deleteNote' update-tags='updateTagsForNote'></editor-section>
+</div>
+<footer ng-if='!needsUnlock'></footer>
+</div>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"Pfile-digest://app/assets/templates/generated/app/assets/templates/home.html;TTF:charsetI"
+utf-8;F:digest"%ÔyÏGÀ½ ñ„ß·µÇÈ„Ò´%å_‡¼aâðB€š:lengthiK:dependencies_digest"%ñf;+@åò¾Û"s]æþ½h+@!_–¶Rà|tv:idI"Ed8c7a9864e44e40829293b8515ace4a663ab033f8acc8cb9ce9eb0997e906f10;F:
+mtimel+ž3]

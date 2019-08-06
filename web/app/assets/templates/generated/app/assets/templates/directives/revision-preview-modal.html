@@ -1,0 +1,24 @@
+<div class='sn-component'>
+<div class='sk-modal medium' id='item-preview-modal'>
+<div class='sk-modal-background'></div>
+<div class='sk-modal-content'>
+<div class='sn-component'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Preview</div>
+<div class='sk-horizontal-group'>
+<a class='sk-a info close-button' ng-click='restore(false)'>Restore</a>
+<a class='sk-a info close-button' ng-click='restore(true)'>Restore as copy</a>
+<a class='sk-a info close-button' ng-click='dismiss(); $event.stopPropagation()'>Close</a>
+</div>
+</div>
+<div class='sk-panel-content selectable' ng-if='!editor'>
+<div class='sk-h2'>{{content.title}}</div>
+<p class='normal sk-p' style='white-space: pre-wrap; font-size: 16px;'>{{content.text}}</p>
+</div>
+<component-view class='component-view' component='editor' ng-if='editor'></component-view>
+</div>
+</div>
+</div>
+</div>
+</div>

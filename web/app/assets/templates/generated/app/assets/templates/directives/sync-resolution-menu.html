@@ -1,0 +1,83 @@
+<div class='sn-component'>
+<div class='sk-panel sk-panel-right' id='sync-resolution-menu'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Out of Sync</div>
+<a class='sk-a info close-button' ng-click='close()'>Close</a>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section'>
+<div class='sk-panel-row sk-p'>
+We've detected that the data on the server may not match the data in the current application session.
+</div>
+<div class='sk-p sk-panel-row'>
+<div class='sk-panel-column'>
+<strong class='sk-panel-row'>Option 1 — Restart App:</strong>
+<div class='sk-p'>Quit the application and re-open it. Sometimes, this may resolve the issue.</div>
+</div>
+</div>
+<div class='sk-p sk-panel-row'>
+<div class='sk-panel-column'>
+<strong class='sk-panel-row'>Option 2 (recommended) — Sign Out:</strong>
+<div class='sk-p'>Sign out of your account, then sign back in. This will ensure your data is consistent with the server.</div>
+Be sure to download a backup of your data before doing so.
+</div>
+</div>
+<div class='sk-p sk-panel-row'>
+<div class='sk-panel-column'>
+<strong class='sk-panel-row'>Option 3 — Sync Resolution:</strong>
+<div class='sk-p'>
+We can attempt to reconcile changes by downloading all data from the server.
+</div>
+No existing data will be overwritten. If the local contents of an item differ from what the server has,
+a conflicted copy will be created.
+</div>
+</div>
+<div ng-if='!status.backupFinished'>
+<div class='sk-p sk-panel-row'>
+Please download a backup before we attempt to perform a full account sync resolution.
+</div>
+<div class='sk-panel-row'>
+<div class='sk-button-group'>
+<div class='sk-button info' ng-click='downloadBackup(true)'>
+<div class='sk-label'>Encrypted</div>
+</div>
+<div class='sk-button info' ng-click='downloadBackup(false)'>
+<div class='sk-label'>Decrypted</div>
+</div>
+<div class='sk-button danger' ng-click='skipBackup()'>
+<div class='sk-label'>Skip</div>
+</div>
+</div>
+</div>
+</div>
+<div ng-if='status.backupFinished'>
+<div class='sk-panel-row' ng-if='!status.resolving &amp;&amp; !status.attemptedResolution'>
+<div class='sk-button info' ng-click='performSyncResolution()'>
+<div class='sk-label'>Perform Sync Resolution</div>
+</div>
+</div>
+<div class='sk-panel-row justify-left' ng-if='status.resolving'>
+<div class='sk-horizontal-group'>
+<div class='sk-spinner small info'></div>
+<div class='sk-label'>Attempting sync resolution...</div>
+</div>
+</div>
+<div class='sk-panel-column' ng-if='status.fail'>
+<div class='sk-panel-row sk-label danger'>Sync Resolution Failed</div>
+<div class='sk-p sk-panel-row'>
+We attempted to reconcile local content and server content, but were unable to do so.
+At this point, we recommend signing out of your account and signing back in. You may
+wish to download a data backup before doing so.
+</div>
+</div>
+<div class='sk-panel-column' ng-if='status.success'>
+<div class='sk-panel-row sk-label success'>Sync Resolution Success</div>
+<div class='sk-p sk-panel-row'>
+Your local data is now in sync with the server. You may close this window.
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

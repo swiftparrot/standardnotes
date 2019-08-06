@@ -1,0 +1,37 @@
+{:uriI"¦file://app/assets/templates/generated/app/assets/templates/directives/menu-row.html?type=text/html&id=3de34592f5000b00075b423530ef5c807afd54ca2b42b1b65d336c85dfe19a24:ET:load_pathI"app/assets/templates;T:filenameI"Qapp/assets/templates/generated/app/assets/templates/directives/menu-row.html;T:	nameI"7generated/app/assets/templates/directives/menu-row;T:logical_pathI"<generated/app/assets/templates/directives/menu-row.html;T:content_typeI"text/html;T:sourceI"<div class='sk-menu-panel-row row' ng-attr-title='{{desc}}' ng-click='onClick($event)'>
+<div class='sk-menu-panel-column'>
+<div class='left'>
+<div class='sk-menu-panel-column' ng-if='circle &amp;&amp; (!circleAlign || circleAlign == &#39;left&#39;)'>
+<div class='sk-circle small' ng-class='circle'></div>
+</div>
+<div class='sk-menu-panel-column' ng-class='{&#39;faded&#39; : faded || disabled}'>
+<div class='sk-label' ng-class='stylekitClass'>
+{{label}}
+</div>
+<div class='sk-sublabel' ng-if='subtitle'>
+{{subtitle}}
+</div>
+<ng-transclude></ng-transclude>
+</div>
+</div>
+<div class='sk-menu-panel-subrows' ng-if='subRows &amp;&amp; subRows.length &gt; 0'>
+<menu-row action='row.onClick()' label='row.label' ng-repeat='row in subRows' spinner-class='row.spinnerClass' subtitle='row.subtitle'></menu-row>
+</div>
+</div>
+<div class='sk-menu-panel-column' ng-if='circle &amp;&amp; circleAlign == &#39;right&#39;'>
+<div class='sk-circle small' ng-class='circle'></div>
+</div>
+<div class='sk-menu-panel-column' ng-if='hasButton'>
+<div class='sk-button' ng-class='buttonClass' ng-click='clickButton($event)'>
+<div class='sk-label'>{{buttonText}}</div>
+</div>
+</div>
+<div class='sk-menu-panel-column' ng-if='spinnerClass'>
+<div class='sk-spinner small' ng-class='spinnerClass'></div>
+</div>
+</div>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"_file-digest://app/assets/templates/generated/app/assets/templates/directives/menu-row.html;TTF:charsetI"
+utf-8;F:digest"%‡	ZsA’,„fòCxåœM$Õ–FD'™Œ2ÏÖ¡l:lengthi:dependencies_digest"%ôëùûÓ¾¾bèø§¾²«b0ÔÈ8a’}*èI1A:idI"E3de34592f5000b00075b423530ef5c807afd54ca2b42b1b65d336c85dfe19a24;F:
+mtimel+ž3]

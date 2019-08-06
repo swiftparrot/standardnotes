@@ -1,0 +1,61 @@
+<div class='sk-modal-background' ng-click='cancel()'></div>
+<div class='sk-modal-content' id='privileges-modal'>
+<div class='sn-component'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Manage Privileges</div>
+<a class='sk-a close-button info' ng-click='cancel()'>Done</a>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section'>
+<table class='sk-table'>
+<thead>
+<tr>
+<th></th>
+<th ng-repeat='cred in availableCredentials'>
+<div class='priv-header'>
+<strong>{{credentialDisplayInfo[cred].label}}</strong>
+<div class='sk-p font-small' ng-show='!credentialDisplayInfo[cred].availability' style='margin-top: 2px'>Not Configured</div>
+</div>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat='action in availableActions'>
+<td>
+<div class='sk-p'>{{displayInfoForAction(action)}}</div>
+</td>
+<th ng-repeat='credential in availableCredentials'>
+<input ng-checked='isCredentialRequiredForAction(action, credential)' ng-click='checkboxValueChanged(action, credential)' ng-disabled='!credentialDisplayInfo[credential].availability' type='checkbox'>
+</th>
+</tr>
+</tbody>
+</table>
+</div>
+<div class='sk-panel-section' ng-if='sessionExpirey &amp;&amp; !sessionExpired'>
+<div class='sk-p sk-panel-row'>You will not be asked to authenticate until {{sessionExpirey}}.</div>
+<a class='sk-a sk-panel-row info' ng-click='clearSession()'>Clear Session</a>
+</div>
+</div>
+<div class='sk-panel-footer'>
+<div class='sk-h2 sk-bold'>About Privileges</div>
+<div class='sk-panel-section no-bottom-pad'>
+<div class='sk-panel-row'>
+<div class='text-content'>
+<div class='sk-p'>
+Privileges represent interface level authentication for accessing certain items and features.
+Note that when your application is unlocked, your data exists in temporary memory in an unencrypted state.
+Privileges are meant to protect against unwanted access in the event of an unlocked application, but do not affect data encryption state.
+</div>
+<p class='sk-p'>
+Privileges sync across your other devices; however, note that if you require
+a "Local Passcode" privilege, and another device does not have a local passcode set up, the local passcode
+requirement will be ignored on that device.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

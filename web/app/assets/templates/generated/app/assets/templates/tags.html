@@ -1,0 +1,54 @@
+<div aria-label='Tags' class='sn-component section tags' id='tags-column'>
+<div class='component-view-container' ng-if='ctrl.component.active'>
+<component-view class='component-view' component='ctrl.component'></component-view>
+</div>
+<div class='content' id='tags-content' ng-if='!(ctrl.component &amp;&amp; ctrl.component.active)'>
+<div class='tags-title-section section-title-bar'>
+<div class='section-title-bar-header'>
+<div class='sk-h3 title'>
+<span class='sk-bold'>Views</span>
+</div>
+<div class='sk-button sk-secondary-contrast wide' ng-click='ctrl.clickedAddNewTag()' title='Create a new tag'>
+<div class='sk-label'>
+<i class='icon ion-plus add-button'></i>
+</div>
+</div>
+</div>
+</div>
+<div class='scrollable'>
+<div class='infinite-scroll'>
+<div class='tag' ng-class='{&#39;selected&#39; : ctrl.selectedTag == tag, &#39;faded&#39; : !tag.content.isAllTag}' ng-click='ctrl.selectTag(tag)' ng-repeat='tag in ctrl.smartTags'>
+<div class='tag-info'>
+<input class='title' ng-disabled='true' ng-model='tag.title'>
+<div class='count' ng-show='tag.content.isAllTag'>{{tag.cachedNoteCount}}</div>
+</div>
+</div>
+<div class='tags-title-section section-title-bar'>
+<div class='section-title-bar-header'>
+<div class='sk-h3 title'>
+<span class='sk-bold'>Tags</span>
+</div>
+</div>
+</div>
+<div class='tag' ng-class='{&#39;selected&#39; : ctrl.selectedTag == tag}' ng-click='ctrl.selectTag(tag)' ng-repeat='tag in ctrl.tags track by tag.uuid'>
+<div class='tag-info'>
+<div class='tag-icon'>#</div>
+<input class='title' ng-attr-id='tag-{{tag.uuid}}' ng-blur='ctrl.saveTag($event, tag)' ng-change='ctrl.tagTitleDidChange(tag)' ng-class='{&#39;editing&#39; : ctrl.editingTag == tag}' ng-click='ctrl.selectTag(tag)' ng-keyup='$event.keyCode == 13 &amp;&amp; $event.target.blur()' ng-model='tag.title' should-focus='ctrl.newTag || ctrl.editingTag == tag' sn-autofocus='true' spellcheck='false'>
+<div class='count'>{{tag.cachedNoteCount}}</div>
+</div>
+<div class='danger small-text bold' ng-show='tag.content.conflict_of'>Conflicted Copy</div>
+<div class='danger small-text bold' ng-show='tag.errorDecrypting'>Missing Keys</div>
+<div class='menu' ng-show='ctrl.selectedTag == tag'>
+<a class='item' ng-click='ctrl.selectedRenameTag($event, tag)' ng-show='!ctrl.editingTag'>Rename</a>
+<a class='item' ng-click='ctrl.saveTag($event, tag)' ng-show='ctrl.editingTag'>Save</a>
+<a class='item' ng-click='ctrl.selectedDeleteTag(tag)'>Delete</a>
+</div>
+</div>
+<div class='no-tags-placeholder' ng-show='ctrl.tags.length == 0'>
+No tags. Create one using the add button above.
+</div>
+</div>
+</div>
+</div>
+<panel-resizer collapsable='true' control='ctrl.panelController' default-width='150' hoverable='true' on-resize-finish='ctrl.onPanelResize' panel-id='&#39;tags-column&#39;'></panel-resizer>
+</div>

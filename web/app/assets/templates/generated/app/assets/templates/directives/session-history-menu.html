@@ -1,0 +1,27 @@
+<div class='sn-component' id='session-history-menu'>
+<div class='sk-menu-panel dropdown-menu'>
+<div class='sk-menu-panel-header'>
+<div class='sk-menu-panel-header-title'>{{history.entries.length || 'No'}} revisions</div>
+<a class='sk-a info sk-h5' ng-click='showOptions = !showOptions; $event.stopPropagation();'>Options</a>
+</div>
+<div ng-if='showOptions'>
+<menu-row action='clearItemHistory()' label='&#39;Clear note local history&#39;'></menu-row>
+<menu-row action='clearAllHistory()' label='&#39;Clear all local history&#39;'></menu-row>
+<menu-row action='toggleAutoOptimize()' label='(autoOptimize ? &#39;Disable&#39; : &#39;Enable&#39;) + &#39; auto cleanup&#39;'>
+<div class='sk-sublabel'>
+Automatically cleans up small revisions to conserve space.
+</div>
+</menu-row>
+<menu-row action='toggleDiskSaving()' label='(diskEnabled ? &#39;Disable&#39; : &#39;Enable&#39;) + &#39; saving history to disk&#39;'>
+<div class='sk-sublabel'>
+Saving to disk is not recommended. Decreases performance and increases app loading time and memory footprint.
+</div>
+</menu-row>
+</div>
+<menu-row action='openRevision(revision);' label='revision.previewTitle()' ng-repeat='revision in entries'>
+<div class='sk-sublabel opaque' ng-class='classForRevision(revision)'>
+{{revision.previewSubTitle()}}
+</div>
+</menu-row>
+</div>
+</div>

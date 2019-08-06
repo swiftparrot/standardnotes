@@ -1,0 +1,113 @@
+<div class='sn-component' ng-if='issueLoading'>
+<div class='sk-app-bar no-edges no-top-edge dynamic-height'>
+<div class='left'>
+<div class='sk-app-bar-item'>
+<div class='sk-label warning'>There was an issue loading {{component.name}}.</div>
+</div>
+</div>
+<div class='right'>
+<div class='sk-app-bar-item' ng-click='reloadComponent()'>
+<div class='sk-button info'>
+<div class='sk-label'>Reload</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='sn-component' ng-if='showNoThemesMessage'>
+<div class='sk-app-bar no-edges no-top-edge dynamic-height'>
+<div class='left'>
+<div class='sk-app-bar-item'>
+<div class='sk-label warning'>This extension does not support themes.</div>
+</div>
+</div>
+<div class='right'>
+<div class='sk-app-bar-item' ng-click='noThemesMessageDismiss()'>
+<div class='sk-label'>Dismiss</div>
+</div>
+<div class='sk-app-bar-item' ng-click='disableActiveTheme()'>
+<div class='sk-label'>Disable Active Theme</div>
+</div>
+</div>
+</div>
+</div>
+<div class='sn-component' ng-if='expired'>
+<div class='sk-app-bar no-edges no-top-edge dynamic-height'>
+<div class='left'>
+<div class='sk-app-bar-item'>
+<div class='sk-app-bar-item-column'>
+<div class='sk-circle danger small'></div>
+</div>
+<div class='sk-app-bar-item-column'>
+<div>
+<a class='sk-label sk-base' href='https://dashboard.standardnotes.org' rel='noopener' target='_blank'>
+Your Extended subscription expired on {{component.dateToLocalizedString(component.valid_until)}}.
+</a>
+<div class='sk-p'>
+Extensions are in a read-only state.
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='right'>
+<div class='sk-app-bar-item' ng-click='reloadComponent()'>
+<div class='sk-button info'>
+<div class='sk-label'>Reload</div>
+</div>
+</div>
+<div class='sk-app-bar-item'>
+<div class='sk-app-bar-item-column'>
+<div class='sk-button warning'>
+<a class='sk-label' href='https://standardnotes.org/help/41/expired' rel='noopener' target='_blank'>Help</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='sn-component' ng-if='error == &#39;offline-restricted&#39;'>
+<div class='sk-panel static'>
+<div class='sk-panel-content'>
+<div class='sk-panel-section stretch'>
+<div class='sk-panel-column'></div>
+<div class='sk-h1 sk-bold'>You have restricted this extension to be used offline only.</div>
+<div class='sk-subtitle'>Offline extensions are not available in the Web app.</div>
+<div class='sk-panel-row'></div>
+<div class='sk-panel-row'>
+<div class='sk-panel-column'>
+<div class='sk-p'>You can either:</div>
+<ul>
+<li class='sk-p'><strong>Enable the Hosted option</strong> for this extension by opening the 'Extensions' menu and toggling 'Use hosted when local is unavailable' under this extension's options. Then press Reload below.</li>
+<li class='sk-p'><strong>Use the Desktop application.</strong></li>
+</ul>
+</div>
+</div>
+<div class='sk-panel-row'>
+<div class='sk-button info' ng-click='reloadStatus()' ng-if='!reloading'>
+<div class='sk-label'>Reload</div>
+</div>
+<div class='sk-spinner info small' ng-if='reloading'></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='sn-component' ng-if='error == &#39;url-missing&#39;'>
+<div class='sk-panel static'>
+<div class='sk-panel-content'>
+<div class='sk-panel-section stretch'>
+<div class='sk-panel-section-title'>This extension is not installed correctly.</div>
+<p>Please uninstall {{component.name}}, then re-install it.</p>
+<p>
+This issue can occur if you access Standard Notes using an older version of the app.
+Ensure you are running at least version 2.1 on all platforms.
+</p>
+</div>
+</div>
+</div>
+</div>
+<iframe data-component-id='{{component.uuid}}' frameBorder='0' ng-attr-id='component-iframe-{{component.uuid}}' ng-if='component &amp;&amp; componentValid' ng-src='{{getUrl() | trusted}}' sandbox='allow-scripts allow-top-navigation-by-user-activation allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-modals allow-forms'>
+Loading
+</iframe>
+<div class='loading-overlay' ng-if='loading'></div>

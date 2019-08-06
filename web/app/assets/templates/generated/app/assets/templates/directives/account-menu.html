@@ -1,0 +1,262 @@
+<div class='sn-component'>
+<div class='sk-panel' id='account-panel'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Account</div>
+<a class='sk-a info close-button' ng-click='close()'>Close</a>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section sk-panel-hero' ng-if='!user &amp;&amp; !formData.showLogin &amp;&amp; !formData.showRegister &amp;&amp; !formData.mfa'>
+<div class='sk-panel-row'>
+<div class='sk-h1'>Sign in or register to enable sync and end-to-end encryption.</div>
+</div>
+<div class='sk-panel-row'>
+<div class='sk-button-group stretch'>
+<div class='sk-button info featured' ng-click='formData.showLogin = true'>
+<div class='sk-label'>Sign In</div>
+</div>
+<div class='sk-button info featured' ng-click='formData.showRegister = true'>
+<div class='sk-label'>Register</div>
+</div>
+</div>
+</div>
+<div class='sk-panel-row sk-p'>
+Standard Notes is free on every platform, and comes standard with sync and encryption.
+</div>
+</div>
+<div class='sk-panel-section' ng-if='formData.showLogin || formData.showRegister'>
+<div class='sk-panel-section-title'>
+{{formData.showLogin ? "Sign In" : "Register"}}
+</div>
+<form class='sk-panel-form' ng-submit='submitAuthForm()'>
+<div class='sk-panel-section'>
+<input class='sk-input contrast' name='email' ng-model-options='{allowInvalid: true}' ng-model='formData.email' placeholder='Email' required should-focus='true' sn-autofocus='true' spellcheck='false' type='email'>
+<input class='sk-input contrast' name='password' ng-model='formData.user_password' placeholder='Password' required sn-enter='submitAuthForm()' type='password'>
+<input class='sk-input contrast' name='password' ng-if='formData.showRegister' ng-model='formData.password_conf' placeholder='Confirm Password' required sn-enter='submitAuthForm()' type='password'>
+<div class='sk-panel-row'></div>
+<a class='sk-panel-row sk-bold' ng-click='formData.showAdvanced = !formData.showAdvanced'>
+Advanced Options
+</a>
+</div>
+<div class='sk-notification unpadded contrast advanced-options sk-panel-row' ng-if='formData.showAdvanced'>
+<div class='sk-panel-column stretch'>
+<div class='sk-notification-title sk-panel-row padded-row'>Advanced Options</div>
+<div class='bordered-row padded-row'>
+<label class='sk-label'>Sync Server Domain</label>
+<input class='sk-input mt-5 sk-base' name='server' ng-model='formData.url' placeholder='Server URL' required type='text'>
+</div>
+<label class='sk-label padded-row' ng-if='formData.showLogin'>
+<input class='sk-input' ng-model='formData.strictSignin' type='checkbox'>
+Use strict sign in
+<span>
+<a class='info' href='https://standardnotes.org/help/security' rel='noopener' target='_blank'>(Learn more)</a>
+</span>
+</input>
+</label>
+</div>
+</div>
+<div class='sk-panel-section form-submit' ng-if='!formData.authenticating'>
+<div class='sk-button-group stretch'>
+<div class='sk-button info featured' ng-click='submitAuthForm()' ng-disabled='formData.authenticating'>
+<div class='sk-label'>{{formData.showLogin ? "Sign In" : "Register"}}</div>
+</div>
+</div>
+</div>
+<div class='sk-notification neutral' ng-if='formData.showRegister'>
+<div class='sk-notification-title'>No Password Reset.</div>
+<div class='sk-notification-text'>Because your notes are encrypted using your password, Standard Notes does not have a password reset option. You cannot forget your password.</div>
+</div>
+<div class='sk-panel-section no-bottom-pad' ng-if='formData.status'>
+<div class='sk-horizontal-group'>
+<div class='sk-spinner small neutral'></div>
+<div class='sk-label'>{{formData.status}}</div>
+</div>
+</div>
+<div class='sk-panel-section no-bottom-pad' ng-if='!formData.authenticating'>
+<label class='sk-panel-row justify-left'>
+<div class='sk-horizontal-group'>
+<input ng-false-value='true' ng-model='formData.ephemeral' ng-true-value='false' type='checkbox'>
+Stay signed in
+</div>
+</label>
+<label class='sk-panel-row justify-left' ng-if='notesAndTagsCount() &gt; 0'>
+<div class='sk-panel-row'></div>
+<input ng-bind='true' ng-change='mergeLocalChanged()' ng-model='formData.mergeLocal' type='checkbox'>
+Merge local data ({{notesAndTagsCount()}} notes and tags)
+</label>
+</div>
+</form>
+</div>
+<div class='sk-panel-section' ng-if='formData.mfa'>
+<form class='sk-panel-form' ng-submit='submitMfaForm()'>
+<div class='sk-p sk-panel-row'>{{formData.mfa.message}}</div>
+<div class='sk-panel-row'>
+<input autofocus='true' class='sk-input contrast' name='mfa' ng-model='formData.userMfaCode' placeholder='Enter Code' required should-focus='true' sn-autofocus='true'>
+</div>
+<div class='sk-button-group stretch sk-panel-row form-submit' ng-if='!formData.status'>
+<button class='sk-button info featured' type='submit'>
+<div class='sk-label'>Sign In</div>
+</button>
+</div>
+</form>
+<div class='sk-panel-section no-bottom-pad' ng-if='formData.status'>
+<div class='sk-panel-row'></div>
+<div class='sk-panel-row'></div>
+<div class='sk-horizontal-group'>
+<div class='sk-spinner small neutral'></div>
+<div class='sk-label'>{{formData.status}}</div>
+</div>
+</div>
+</div>
+<div ng-if='!formData.showLogin &amp;&amp; !formData.showRegister &amp;&amp; !formData.mfa'>
+<div class='sk-panel-section' ng-if='user'>
+<div class='sk-notification danger' ng-if='syncStatus.error'>
+<div class='sk-notification-title'>Sync Unreachable</div>
+<div class='sk-notification-text'>Hmm...we can't seem to sync your account. The reason: {{syncStatus.error.message}}</div>
+<a class='sk-a info-contrast sk-bold sk-panel-row' href='https://standardnotes.org/help' rel='noopener' target='_blank'>Need help?</a>
+</div>
+<div class='sk-panel-row'>
+<div class='sk-panel-column'>
+<div class='sk-h1 sk-bold wrap'>{{user.email}}</div>
+<div class='sk-subtitle subtle normal'>{{server}}</div>
+</div>
+<div class='sk-horizontal-group' delay-hide='true' delay='1000' show='syncStatus.syncOpInProgress || syncStatus.needsMoreSync'>
+<div class='sk-spinner small info'></div>
+<div class='sk-sublabel'>
+{{"Syncing" + (syncStatus.total > 0 ? ":" : "")}}
+<span ng-if='syncStatus.total &gt; 0'>{{syncStatus.current}}/{{syncStatus.total}}</span>
+</div>
+</div>
+</div>
+<div class='sk-panel-row'></div>
+<a class='sk-a info sk-panel-row condensed' ng-click='openPasswordWizard(&#39;change-pw&#39;)'>
+Change Password
+</a>
+<a class='sk-a info sk-panel-row condensed' ng-click='openPrivilegesModal(&#39;&#39;)' ng-show='user'>
+Manage Privileges
+</a>
+<a class='sk-panel-row justify-left condensed success' ng-click='openPasswordWizard(&#39;upgrade-security&#39;)' ng-if='securityUpdateAvailable'>
+<div class='inline sk-circle small success mr-8'></div>
+<div class='inline'>Security Update Available</div>
+</a>
+</div>
+<div class='sk-panel-section'>
+<div class='sk-panel-section-title'>Encryption</div>
+<div class='sk-panel-section-subtitle info' ng-if='encryptionEnabled()'>
+{{encryptionStatusForNotes()}}
+</div>
+<p class='sk-p'>
+{{encryptionStatusString()}}
+</p>
+</div>
+<div class='sk-panel-section'>
+<div class='sk-panel-section-title'>Passcode Lock</div>
+<div ng-if='!hasPasscode()'>
+<div ng-if='canAddPasscode'>
+<div class='sk-panel-row' ng-if='!formData.showPasscodeForm'>
+<div class='sk-button info' ng-click='addPasscodeClicked(); $event.stopPropagation();'>
+<div class='sk-label'>Add Passcode</div>
+</div>
+</div>
+<p class='sk-p'>Add an app passcode to lock the app and encrypt on-device key storage.</p>
+</div>
+<div ng-if='!canAddPasscode'>
+<p class='sk-p'>Adding a passcode is not supported in temporary sessions. Please sign out, then sign back in with the "Stay signed in" option checked.</p>
+</div>
+</div>
+<form class='sk-panel-form' ng-if='formData.showPasscodeForm' ng-submit='submitPasscodeForm()'>
+<div class='sk-panel-row'></div>
+<input class='sk-input contrast' ng-model='formData.passcode' placeholder='Passcode' should-focus='true' sn-autofocus='true' type='password'>
+<input class='sk-input contrast' ng-model='formData.confirmPasscode' placeholder='Confirm Passcode' type='password'>
+<div class='sk-button-group stretch sk-panel-row form-submit'>
+<button class='sk-button info' type='submit'>
+<div class='sk-label'>Set Passcode</div>
+</button>
+</div>
+<a class='neutral sk-a sk-panel-row' ng-click='formData.showPasscodeForm = false'>Cancel</a>
+</form>
+<div ng-if='hasPasscode() &amp;&amp; !formData.showPasscodeForm'>
+<div class='sk-p'>
+Passcode lock is enabled.
+</div>
+<div class='sk-notification contrast'>
+<div class='sk-notification-title'>Options</div>
+<div class='sk-notification-text'>
+<div class='sk-panel-row'>
+<div class='sk-horizontal-group'>
+<div class='sk-h4 sk-bold'>Autolock</div>
+<a class='sk-a info' ng-class='{&#39;boxed&#39; : option.value == selectedAutoLockInterval}' ng-click='selectAutoLockInterval(option.value)' ng-repeat='option in passcodeAutoLockOptions'>
+{{option.label}}
+</a>
+</div>
+</div>
+<div class='sk-p'>The autolock timer begins when the window or tab loses focus.</div>
+<div class='sk-panel-row'></div>
+<a class='sk-a info sk-panel-row condensed' ng-click='openPrivilegesModal(&#39;&#39;)' ng-show='!user'>Manage Privileges</a>
+<a class='sk-a info sk-panel-row condensed' ng-click='changePasscodePressed()'>Change Passcode</a>
+<a class='sk-a danger sk-panel-row condensed' ng-click='removePasscodePressed()'>Remove Passcode</a>
+</div>
+</div>
+</div>
+</div>
+<div class='sk-panel-section' ng-if='!importData.loading'>
+<div class='sk-panel-section-title'>Data Backups</div>
+<div class='sk-p'>
+Download a backup of all your data.
+</div>
+<div class='sk-panel-row'></div>
+<form class='sk-panel-form sk-panel-row' ng-if='encryptedBackupsAvailable()'>
+<div class='sk-input-group'>
+<label>
+<input ng-change='archiveFormData.encrypted = true' ng-model='archiveFormData.encrypted' ng-value='true' type='radio'>
+Encrypted
+</label>
+<label>
+<input ng-change='archiveFormData.encrypted = false' ng-model='archiveFormData.encrypted' ng-value='false' type='radio'>
+Decrypted
+</label>
+</div>
+</form>
+<div class='sk-button-group sk-panel-row justify-left'>
+<div class='sk-button info' ng-click='downloadDataArchive()'>
+<div class='sk-label'>Download Backup</div>
+</div>
+<label class='sk-button info'>
+<input file-change='-&gt;' handler='importFileSelected(files)' style='display: none;' type='file'>
+<div class='sk-label'>Import Backup</div>
+</label>
+</div>
+<span ng-if='isDesktopApplication()'>Backups are automatically created on desktop and can be managed via the "Backups" top-level menu.</span>
+<div id='import-password-request' ng-if='importData.requestPassword'>
+<form class='sk-panel-form stretch' ng-submit='submitImportPassword()'>
+<p>Enter the account password associated with the import file.</p>
+<input autofocus='true' class='sk-input contrast mt-5' ng-model='importData.password' placeholder='Enter File Account Password' type='password'>
+<div class='sk-button-group stretch sk-panel-row form-submit'>
+<button class='sk-button info' type='submit'>
+<div class='sk-label'>Decrypt & Import</div>
+</button>
+</div>
+<p>
+Importing from backup will not overwrite existing data, but instead create a duplicate of any differing data.
+</p>
+<p>If you'd like to import only a selection of items instead of the whole file, please use the Batch Manager extension.</p>
+</form>
+</div>
+<div class='sk-panel-row'>
+<div class='sk-spinner small info' ng-if='importData.loading'></div>
+</div>
+</div>
+</div>
+</div>
+<div class='sk-panel-footer'>
+<div class='sk-panel-row'>
+<div class='sk-p left neutral faded'>{{appVersion}}</div>
+<a class='sk-a right' ng-click='formData.showLogin = false; formData.showRegister = false;' ng-if='formData.showLogin || formData.showRegister'>
+Cancel
+</a>
+<a class='sk-a right danger' ng-click='destroyLocalData()' ng-if='!formData.showLogin &amp;&amp; !formData.showRegister'>
+{{ user ? "Sign out and clear local data" : "Clear all local data" }}
+</a>
+</div>
+</div>
+</div>
+</div>

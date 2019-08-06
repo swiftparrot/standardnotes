@@ -1,0 +1,77 @@
+<div class='sn-component'>
+<div class='sk-app-bar no-edges no-bottom-edge' id='footer-bar'>
+<div class='left'>
+<div class='sk-app-bar-item' click-outside='ctrl.clickOutsideAccountMenu()' is-open='ctrl.showAccountMenu' ng-click='ctrl.accountMenuPressed()'>
+<div class='sk-app-bar-item-column'>
+<div class='sk-circle small' ng-class='ctrl.error ? &#39;danger&#39; : (ctrl.getUser() ? &#39;info&#39; : &#39;neutral&#39;)'></div>
+</div>
+<div class='sk-app-bar-item-column'>
+<div class='sk-label title' ng-class='{red: ctrl.error}'>Account</div>
+</div>
+<account-menu close-function='ctrl.closeAccountMenu' ng-click='$event.stopPropagation()' ng-if='ctrl.showAccountMenu' on-successful-auth='ctrl.onAuthSuccess'></account-menu>
+</div>
+<div class='sk-app-bar-item'>
+<a class='no-decoration sk-label title' href='https://standardnotes.org/help' rel='noopener' target='_blank'>
+Help
+</a>
+</div>
+<div class='sk-app-bar-item border'></div>
+<div class='sk-app-bar-item' ng-repeat='room in ctrl.rooms track by room.uuid'>
+<div class='sk-app-bar-item-column' ng-click='ctrl.selectRoom(room)'>
+<div class='sk-label'>{{room.name}}</div>
+</div>
+<component-modal component='room' ng-if='room.showRoom' on-dismiss='ctrl.onRoomDismiss'></component-modal>
+</div>
+</div>
+<div class='center'>
+<div class='sk-app-bar-item' ng-show='ctrl.arbitraryStatusMessage'>
+<div class='sk-app-bar-item-column'>
+<span class='neutral sk-label'>{{ctrl.arbitraryStatusMessage}}</span>
+</div>
+</div>
+</div>
+<div class='right'>
+<div class='sk-app-bar-item' ng-click='ctrl.openSecurityUpdate()' ng-show='ctrl.securityUpdateAvailable'>
+<span class='success sk-label'>Security update available.</span>
+</div>
+<div class='sk-app-bar-item' ng-click='ctrl.clickedNewUpdateAnnouncement()' ng-show='ctrl.newUpdateAvailable == true'>
+<span class='info sk-label'>New update available.</span>
+</div>
+<div class='sk-app-bar-item no-pointer' ng-if='ctrl.lastSyncDate &amp;&amp; !ctrl.isRefreshing'>
+<div class='sk-label subtle'>
+Last refreshed {{ctrl.lastSyncDate | appDateTime}}
+</div>
+</div>
+<div class='sk-app-bar-item' ng-click='ctrl.toggleSyncResolutionMenu()' ng-if='(ctrl.outOfSync &amp;&amp; !ctrl.isRefreshing) || ctrl.showSyncResolution'>
+<div class='sk-label warning' ng-if='ctrl.outOfSync'>Potentially Out of Sync</div>
+<sync-resolution-menu close-function='ctrl.toggleSyncResolutionMenu' ng-click='$event.stopPropagation();' ng-if='ctrl.showSyncResolution'></sync-resolution-menu>
+</div>
+<div class='sk-app-bar-item' ng-if='ctrl.lastSyncDate &amp;&amp; ctrl.isRefreshing'>
+<div class='sk-spinner small'></div>
+</div>
+<div class='sk-app-bar-item' ng-if='ctrl.offline'>
+<div class='sk-label'>Offline</div>
+</div>
+<div class='sk-app-bar-item' ng-click='ctrl.refreshData()' ng-if='!ctrl.offline'>
+<div class='sk-label'>Refresh</div>
+</div>
+<div class='sk-app-bar-item border' ng-if='ctrl.dockShortcuts.length &gt; 0'></div>
+<div class='sk-app-bar-item dock-shortcut' ng-repeat='shortcut in ctrl.dockShortcuts'>
+<div class='sk-app-bar-item-column' ng-class='{&#39;underline&#39;: shortcut.component.active}' ng-click='ctrl.selectShortcut(shortcut)'>
+<div class='div' ng-if='shortcut.icon.type == &#39;circle&#39;'>
+<div class='sk-circle small' ng-style='{&#39;background-color&#39;: shortcut.icon.background_color, &#39;border-color&#39;: shortcut.icon.border_color}'></div>
+</div>
+<div class='div' ng-if='shortcut.icon.type == &#39;svg&#39;'>
+<div class='svg-item' elem-ready='ctrl.initSvgForShortcut(shortcut)' ng-attr-id='dock-svg-{{shortcut.component.uuid}}'></div>
+</div>
+</div>
+</div>
+<div class='sk-app-bar-item border' ng-if='ctrl.hasPasscode()'></div>
+<div class='sk-app-bar-item' id='lock-item' ng-click='ctrl.lockApp()' ng-if='ctrl.hasPasscode()' title='Locks application and wipes unencrypted data from memory.'>
+<div class='sk-label'>
+<i class='icon ion-locked' id='footer-lock-icon'></i>
+</div>
+</div>
+</div>
+</div>
+</div>

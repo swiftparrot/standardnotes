@@ -1,0 +1,103 @@
+<div aria-label='Note' class='section editor sn-component' id='editor-column'>
+<div class='sn-component'>
+<div class='sk-app-bar no-edges' ng-if='ctrl.note.locked' ng-init='ctrl.lockText = &#39;Note Locked&#39;' ng-mouseleave='ctrl.lockText = &#39;Note Locked&#39;' ng-mouseover='ctrl.lockText = &#39;Unlock&#39;'>
+<div class='left'>
+<div class='sk-app-bar-item' ng-click='ctrl.toggleLockNote()'>
+<div class='sk-label warning'>
+<i class='icon ion-locked'></i>
+{{ctrl.lockText}}
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='section-title-bar' id='editor-title-bar' ng-class='{&#39;locked&#39; : ctrl.note.locked }' ng-show='ctrl.note &amp;&amp; !ctrl.note.errorDecrypting'>
+<div class='title'>
+<input class='input' id='note-title-editor' ng-blur='ctrl.onNameBlur()' ng-change='ctrl.onTitleChange()' ng-disabled='ctrl.note.locked' ng-focus='ctrl.onNameFocus()' ng-keyup='$event.keyCode == 13 &amp;&amp; ctrl.onTitleEnter($event)' ng-model='ctrl.note.title' select-on-click='true' spellcheck='false'>
+</div>
+<div id='save-status'>
+<div class='message' ng-class='{&#39;warning sk-bold&#39;: ctrl.syncTakingTooLong, &#39;danger sk-bold&#39;: ctrl.saveError}'>{{ctrl.noteStatus.message}}</div>
+<div class='desc' ng-show='ctrl.noteStatus.desc'>{{ctrl.noteStatus.desc}}</div>
+</div>
+<div class='editor-tags'>
+<div id='note-tags-component-container' ng-if='ctrl.tagsComponent'>
+<component-view class='component-view' component='ctrl.tagsComponent' ng-class='{&#39;locked&#39; : ctrl.note.locked }' ng-style='ctrl.note.locked &amp;&amp; {&#39;pointer-events&#39; : &#39;none&#39;}'></component-view>
+</div>
+<input class='tags-input' ng-blur='ctrl.updateTagsFromTagsString($event, ctrl.tagsString)' ng-disabled='ctrl.note.locked' ng-if='!(ctrl.tagsComponent &amp;&amp; ctrl.tagsComponent.active)' ng-keyup='$event.keyCode == 13 &amp;&amp; $event.target.blur();' ng-model='ctrl.tagsString' placeholder='#tags' spellcheck='false' type='text'>
+</div>
+</div>
+<div class='sn-component' ng-if='ctrl.note'>
+<div class='sk-app-bar no-edges' id='editor-menu-bar'>
+<div class='left'>
+<div class='sk-app-bar-item' click-outside='ctrl.showMenu = false;' is-open='ctrl.showMenu' ng-class='{&#39;selected&#39; : ctrl.showMenu}' ng-click='ctrl.toggleMenu(&#39;showMenu&#39;)'>
+<div class='sk-label'>Options</div>
+<div class='sk-menu-panel dropdown-menu' ng-if='ctrl.showMenu'>
+<div class='sk-menu-panel-section'>
+<div class='sk-menu-panel-header'>
+<div class='sk-menu-panel-header-title'>Note Options</div>
+</div>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.togglePin()' desc='&#39;Pin or unpin a note from the top of your list&#39;' label='ctrl.note.pinned ? &#39;Unpin&#39; : &#39;Pin&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.toggleArchiveNote()' desc='&#39;Archive or unarchive a note from your Archived system tag&#39;' label='ctrl.note.archived ? &#39;Unarchive&#39; : &#39;Archive&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.toggleLockNote()' desc='&#39;Locking notes prevents unintentional editing&#39;' label='ctrl.note.locked ? &#39;Unlock&#39; : &#39;Lock&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.toggleProtectNote()' desc='&#39;Protecting a note will require credentials to view it (Manage Privileges via Account menu)&#39;' label='ctrl.note.content.protected ? &#39;Unprotect&#39; : &#39;Protect&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.toggleNotePreview()' circle-align='&#39;right&#39;' circle='ctrl.note.content.hidePreview ? &#39;danger&#39; : &#39;success&#39;' desc='&#39;Hide or unhide the note preview from the list of notes&#39;' label='&#39;Preview&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(); ctrl.deleteNote()' desc='&#39;Send this note to the trash&#39;' label='&#39;Move to Trash&#39;' ng-show='!ctrl.altKeyDown &amp;&amp; !ctrl.note.content.trashed &amp;&amp; !ctrl.note.errorDecrypting' stylekit-class='&#39;warning&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(); ctrl.deleteNotePermanantely()' desc='&#39;Delete this note permanently from all your devices&#39;' label='&#39;Delete Permanently&#39;' ng-show='!ctrl.note.content.trashed &amp;&amp; ctrl.note.errorDecrypting' stylekit-class='&#39;danger&#39;'></menu-row>
+</div>
+<div ng-if='ctrl.note.content.trashed || ctrl.altKeyDown'>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.restoreTrashedNote()' desc='&#39;Undelete this note and restore it back into your notes&#39;' label='&#39;Restore&#39;' ng-show='ctrl.note.content.trashed' stylekit-class='&#39;info&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.deleteNotePermanantely()' desc='&#39;Delete this note permanently from all your devices&#39;' label='&#39;Delete Permanently&#39;' stylekit-class='&#39;danger&#39;'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.emptyTrash()' desc='&#39;Permanently delete all notes in the trash&#39;' label='&#39;Empty Trash&#39;' ng-show='ctrl.note.content.trashed || !ctrl.altKeyDown' stylekit-class='&#39;danger&#39;' subtitle='ctrl.getTrashCount() + &#39; notes in trash&#39;'></menu-row>
+</div>
+<div class='sk-menu-panel-section'>
+<div class='sk-menu-panel-header'>
+<div class='sk-menu-panel-header-title'>Global Display</div>
+</div>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.toggleKey(&#39;monospaceFont&#39;)' circle='ctrl.monospaceFont ? &#39;success&#39; : &#39;neutral&#39;' desc='&#39;Toggles the font style for the default editor&#39;' disabled='ctrl.selectedEditor' label='&#39;Monospace Font&#39;' subtitle='ctrl.selectedEditor ? &#39;Not available with editor extensions&#39; : null'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.toggleKey(&#39;spellcheck&#39;)' circle='ctrl.spellcheck ? &#39;success&#39; : &#39;neutral&#39;' desc='&#39;Toggles spellcheck for the default editor&#39;' disabled='ctrl.selectedEditor' label='&#39;Spellcheck&#39;' subtitle='ctrl.selectedEditor ? &#39;Not available with editor extensions&#39; : (ctrl.isDesktop ? &#39;May degrade editor performance&#39; : null)'></menu-row>
+<menu-row action='ctrl.selectedMenuItem(true); ctrl.toggleKey(&#39;marginResizersEnabled&#39;)' circle='ctrl.marginResizersEnabled ? &#39;success&#39; : &#39;neutral&#39;' desc='&#39;Allows for editor left and right margins to be resized&#39;' faded='!ctrl.marginResizersEnabled' label='&#39;Margin Resizers&#39;'></menu-row>
+</div>
+</div>
+</div>
+<div class='sk-app-bar-item' click-outside='ctrl.showEditorMenu = false;' is-open='ctrl.showEditorMenu' ng-class='{&#39;selected&#39; : ctrl.showEditorMenu}' ng-click='ctrl.toggleMenu(&#39;showEditorMenu&#39;)'>
+<div class='sk-label'>Editor</div>
+<editor-menu callback='ctrl.editorMenuOnSelect' current-item='ctrl.note' ng-if='ctrl.showEditorMenu' selected-editor='ctrl.selectedEditor'></editor-menu>
+</div>
+<div class='sk-app-bar-item' click-outside='ctrl.showExtensions = false;' is-open='ctrl.showExtensions' ng-class='{&#39;selected&#39; : ctrl.showExtensions}' ng-click='ctrl.toggleMenu(&#39;showExtensions&#39;)'>
+<div class='sk-label'>Actions</div>
+<actions-menu item='ctrl.note' ng-if='ctrl.showExtensions'></actions-menu>
+</div>
+<div class='sk-app-bar-item' click-outside='ctrl.showSessionHistory = false;' is-open='ctrl.showSessionHistory' ng-click='ctrl.toggleMenu(&#39;showSessionHistory&#39;)'>
+<div class='sk-label'>Session History</div>
+<session-history-menu item='ctrl.note' ng-if='ctrl.showSessionHistory'></session-history-menu>
+</div>
+</div>
+</div>
+</div>
+<div class='editor-content' id='editor-content' ng-if='ctrl.noteReady &amp;&amp; !ctrl.note.errorDecrypting'>
+<panel-resizer class='left' control='ctrl.leftResizeControl' hoverable='true' min-width='300' ng-if='ctrl.marginResizersEnabled' on-resize-finish='ctrl.onPanelResizeFinish' panel-id='&#39;editor-content&#39;' property='&#39;left&#39;'></panel-resizer>
+<component-view class='component-view' component='ctrl.selectedEditor' ng-if='ctrl.selectedEditor' on-load='ctrl.onEditorLoad'></component-view>
+<textarea class='editable' dir='auto' id='note-text-editor' ng-attr-spellcheck='{{ctrl.spellcheck}}' ng-change='ctrl.contentChanged()' ng-click='ctrl.clickedTextArea()' ng-focus='ctrl.onContentFocus()' ng-if='!ctrl.selectedEditor' ng-model-options='{ debounce: ctrl.EditorNgDebounce }' ng-model='ctrl.note.text' ng-readonly='ctrl.note.locked' ng-trim='false'>{{ctrl.onSystemEditorLoad()}}</textarea>
+<panel-resizer control='ctrl.rightResizeControl' hoverable='true' min-width='300' ng-if='ctrl.marginResizersEnabled' on-resize-finish='ctrl.onPanelResizeFinish' panel-id='&#39;editor-content&#39;' property='&#39;right&#39;'></panel-resizer>
+</div>
+<div class='section' ng-show='ctrl.note.errorDecrypting'>
+<p class='medium-padding' style='padding-top: 0 !important;'>There was an error decrypting this item. Ensure you are running the latest version of this app, then sign out and sign back in to try again.</p>
+</div>
+<div id='editor-pane-component-stack' ng-show='ctrl.note'>
+<div class='sk-app-bar no-edges' id='component-stack-menu-bar' ng-if='ctrl.componentStack.length'>
+<div class='left'>
+<div class='sk-app-bar-item' ng-click='ctrl.toggleStackComponentForCurrentItem(component)' ng-repeat='component in ctrl.componentStack'>
+<div class='sk-app-bar-item-column'>
+<div class='sk-circle small' ng-class='{&#39;info&#39; : !component.hidden &amp;&amp; component.active, &#39;neutral&#39; : component.hidden  || !component.active}'></div>
+</div>
+<div class='sk-app-bar-item-column'>
+<div class='sk-label'>{{component.name}}</div>
+</div>
+</div>
+</div>
+</div>
+<div class='sn-component'>
+<component-view class='component-view component-stack-item' component='component' manual-dealloc='true' ng-if='component.active' ng-repeat='component in ctrl.componentStack' ng-show='!component.hidden'></component-view>
+</div>
+</div>
+</div>

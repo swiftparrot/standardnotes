@@ -1,0 +1,34 @@
+<div class='sn-component' id='lock-screen'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Passcode Required</div>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section'>
+<form class='sk-panel-form sk-panel-row' ng-submit='submitPasscodeForm()'>
+<div class='sk-panel-column stretch'>
+<input autocomplete='new-password' autofocus='true' class='center-text sk-input contrast' id='passcode-input' ng-model='formData.passcode' placeholder='Enter Passcode' should-focus='true' sn-autofocus='true' type='password'>
+<div class='sk-button-group stretch sk-panel-row form-submit'>
+<button class='sk-button info' type='submit'>
+<div class='sk-label'>Unlock</div>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<div class='sk-panel-footer'>
+<div id='passcode-reset'>
+<a class='sk-a neutral' ng-click='forgotPasscode()' ng-if='!formData.showRecovery'>Forgot?</a>
+<div ng-if='formData.showRecovery'>
+<div class='sk-p'>
+If you forgot your local passcode, your only option is to clear your local data from this device
+and sign back in to your account.
+</div>
+<div class='sk-panel-row'></div>
+<a class='sk-a danger center-text' ng-click='beginDeleteData()'>Delete Local Data</a>
+</div>
+</div>
+</div>
+</div>
+</div>

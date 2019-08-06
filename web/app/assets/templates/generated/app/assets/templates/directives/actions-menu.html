@@ -1,0 +1,24 @@
+<div class='sn-component'>
+<div class='sk-menu-panel dropdown-menu'>
+<a class='no-decoration' href='https://standardnotes.org/extensions' ng-if='extensions.length == 0' rel='noopener' target='blank'>
+<menu-row label='&#39;Download Actions&#39;'></menu-row>
+</a>
+<div ng-repeat='extension in extensions'>
+<div class='sk-menu-panel-header' ng-click='extension.hide = !extension.hide; $event.stopPropagation();'>
+<div class='sk-menu-panel-column'>
+<div class='sk-menu-panel-header-title'>{{extension.name}}</div>
+<div class='sk-spinner small loading' ng-if='extension.loading'></div>
+<div ng-if='extension.hide'>…</div>
+</div>
+</div>
+<menu-row action='executeAction(action, extension);' label='action.label' ng-if='!extension.hide' ng-repeat='action in extension.actionsWithContextForItem(item)' spinner-class='action.running ? &#39;info&#39; : null' sub-rows='action.subrows' subtitle='action.desc'>
+<div class='sk-sublabel' ng-if='action.access_type'>
+Uses
+<strong>{{action.access_type}}</strong>
+access to this note.
+</div>
+</menu-row>
+<menu-row faded='true' label='&#39;No Actions Available&#39;' ng-if='extension.actionsWithContextForItem(item).length == 0'></menu-row>
+</div>
+</div>
+</div>

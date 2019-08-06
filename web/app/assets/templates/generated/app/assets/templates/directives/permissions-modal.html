@@ -1,0 +1,33 @@
+<div class='sk-modal-background' ng-click='deny()'></div>
+<div class='sk-modal-content' id='permissions-modal'>
+<div class='sn-component'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Activate Extension</div>
+<a class='sk-a info close-button' ng-click='deny()'>Cancel</a>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section'>
+<div class='sk-panel-row'>
+<div class='sk-h2'>
+<strong>{{component.name}}</strong>
+would like to interact with your
+{{permissionsString}}
+</div>
+</div>
+<div class='sk-panel-row'>
+<p class='sk-p'>
+Extensions use an offline messaging system to communicate. Learn more at
+<a class='sk-a info' href='https://standardnotes.org/permissions' rel='noopener' target='_blank'>https://standardnotes.org/permissions.</a>
+</p>
+</div>
+</div>
+</div>
+<div class='sk-panel-footer'>
+<div class='sk-button info big block bold' ng-click='accept()'>
+<div class='sk-label'>Continue</div>
+</div>
+</div>
+</div>
+</div>
+</div>

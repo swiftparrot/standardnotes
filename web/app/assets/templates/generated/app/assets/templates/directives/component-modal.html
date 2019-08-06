@@ -1,0 +1,14 @@
+<div class='sk-modal-background' ng-click='dismiss()'></div>
+<div class='sk-modal-content' ng-attr-id='component-content-outer-{{component.uuid}}'>
+<div class='sn-component'>
+<div class='sk-panel' ng-attr-id='component-content-inner-{{component.uuid}}'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>
+{{component.name}}
+</div>
+<a class='sk-a info close-button' ng-click='dismiss()'>Close</a>
+</div>
+<component-view class='component-view' component='component'></component-view>
+</div>
+</div>
+</div>

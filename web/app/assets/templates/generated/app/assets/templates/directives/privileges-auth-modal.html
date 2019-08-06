@@ -1,0 +1,40 @@
+<div class='sk-modal-background' ng-click='cancel()'></div>
+<div class='sk-modal-content' id='privileges-modal'>
+<div class='sn-component'>
+<div class='sk-panel'>
+<div class='sk-panel-header'>
+<div class='sk-panel-header-title'>Authentication Required</div>
+<a class='close-button info' ng-click='cancel()'>Cancel</a>
+</div>
+<div class='sk-panel-content'>
+<div class='sk-panel-section'>
+<div ng-repeat='credential in requiredCredentials'>
+<div class='sk-p sk-bold sk-panel-row'>
+<strong>{{promptForCredential(credential)}}</strong>
+</div>
+<div class='sk-panel-row'>
+<input class='sk-input contrast' ng-model='authenticationParameters[credential]' should-focus='$index == 0' sn-autofocus='true' sn-enter='submit()' type='password'>
+</div>
+<div class='sk-panel-row'>
+<label class='sk-label danger' ng-if='isCredentialInFailureState(credential)'>Invalid authentication. Please try again.</label>
+</div>
+</div>
+<div class='sk-panel-row'></div>
+<div class='sk-panel-row'>
+<div class='sk-horizontal-group'>
+<div class='sk-p sk-bold'>Remember For</div>
+<a class='sk-a info' ng-class='{&#39;boxed&#39; : option.value == selectedSessionLength}' ng-click='selectSessionLength(option.value)' ng-repeat='option in sessionLengthOptions'>
+{{option.label}}
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class='sk-panel-footer extra-padding'>
+<div class='sk-button info big block bold' ng-click='submit()'>
+<div class='sk-label'>Submit</div>
+</div>
+</div>
+</div>
+</div>
+</div>
