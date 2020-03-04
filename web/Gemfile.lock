@@ -103,7 +103,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     non-stupid-digest-assets (1.0.9)
       sprockets (>= 2.0)
-    puma (3.11.4)
+    puma (3.12.4)
     rack (2.0.5)
     rack-cors (1.0.2)
     rack-protection (2.0.1)
